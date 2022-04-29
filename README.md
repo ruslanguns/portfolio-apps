@@ -20,4 +20,4 @@ I will try to use different technologies and frameworks to build the apps, but I
 
 Ruslan Gonzalez
 
-- Twitter: [@ruslanguns](https://twitter.com/ruslangonzalez)
+- Twitter: [@ruslangonzalez](https://twitter.com/ruslangonzalez)
