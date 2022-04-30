@@ -1,4 +1,4 @@
-# Countdown Event Timer
+# Countdown Event Timer.
 
 This application is part of the portfolio projects challenge. It is a simple countdown timer that can be used to set a time for an event.
 

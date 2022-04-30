@@ -1,5 +1,5 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import Head from 'next/head'
+import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
@@ -10,10 +10,10 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className="text-5xl font-bold mb-5">Upcomming events!</h1>
+        <h1 className="mb-5 text-5xl font-bold">Upcomming events!</h1>
 
-        <p className={styles.description}>In construction!</p>
+        <p className={styles.description}>Under construction!</p>
       </main>
     </div>
-  );
+  )
 }

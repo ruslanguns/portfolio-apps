@@ -1,0 +1,25 @@
+.container {
+  @apply flex justify-center bg-[#665598];
+  color: white;
+}
+
+.main {
+  @apply flex flex-col flex-1 max-w-lg;
+  min-height: 100vh;
+  padding: 4rem 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.control {
+  @apply block w-full py-2 pl-3 text-black bg-white placeholder:font-thin;
+}
+
+.control:focus {
+  outline: 1px solid rgb(0, 0, 0);
+}
+
+@media screen and (max-width: 640px) {
+  .main {
+    padding: 2rem 0.5rem;
+  }
+}
