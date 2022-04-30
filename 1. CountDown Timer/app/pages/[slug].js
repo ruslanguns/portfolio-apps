@@ -50,12 +50,17 @@ export default function Home() {
                 type="date"
                 min={new Date().toISOString().split('T')[0]}
                 className={styles.control}
+                placeholder="yyyy-mm-dd"
               />
             </label>
 
             <label className="w-full">
               <span className="text-sm">Time</span>
-              <input type="time" className={styles.control} />
+              <input
+                type="time"
+                placeholder="HH:MM:SS"
+                className={styles.control}
+              />
             </label>
           </div>
 

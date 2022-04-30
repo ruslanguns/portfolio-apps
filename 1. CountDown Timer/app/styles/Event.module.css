@@ -11,7 +11,7 @@
 }
 
 .control {
-  @apply block w-full py-2 pl-3 text-black placeholder:font-thin;
+  @apply block w-full py-2 pl-3 text-black bg-white placeholder:font-thin;
 }
 
 .control:focus {
