@@ -8,10 +8,10 @@ import Heading from '../components/Heading'
 export default function Home() {
   const router = useRouter()
   const { slug } = router.query
-  const [isEdit, setIsEdit] = useState(true)
+  const [isEdit, setIsEdit] = useState(false)
 
   useEffect(() => {
-    slug && slug === 'edit' && setIsEdit(true)
+    slug && slug !== 'add' && setIsEdit(true)
   }, [slug])
 
   if (!slug) {
@@ -28,7 +28,50 @@ export default function Home() {
       <main className={styles.main}>
         <Heading icon={BackIcon} title="Submit an event" />
 
-        <p className={styles.description}>Under construction!</p>
+        <small>All fields with an asterisk (*) are mandatory.</small>
+
+        <form
+          autoComplete="off"
+          className="left-0 flex flex-col w-full gap-3 mt-4 text-sm sm:mx-0 sm:-left-36"
+          onSubmit={(e) => e.preventDefault()}
+        >
+          <label className="w-full">
+            <span className="text-sm">Name *</span>
+            <input
+              className={styles.control}
+              placeholder="Event name goes here!"
+            />
+          </label>
+
+          <div className="flex flex-col justify-between w-full gap-2 sm:flex-row ">
+            <label className="w-full">
+              <span className="text-sm">Date *</span>
+              <input
+                type="date"
+                min={new Date().toISOString().split('T')[0]}
+                className={styles.control}
+              />
+            </label>
+
+            <label className="w-full">
+              <span className="text-sm">Time</span>
+              <input type="time" className={styles.control} />
+            </label>
+          </div>
+
+          <label className="w-full">
+            <span className="text-sm">Description</span>
+            <textarea
+              rows={5}
+              className={styles.control}
+              placeholder="Provide some details about this event"
+            />
+          </label>
+
+          <button className="self-center block py-2 hover:bg-[#5aac9d] px-20 mt-5 bg-[#53A798]">
+            Start
+          </button>
+        </form>
       </main>
     </div>
   )
