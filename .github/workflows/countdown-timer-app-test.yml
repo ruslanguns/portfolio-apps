@@ -8,11 +8,11 @@ on:
     branches:
       - main
     paths:
-      - "1.\ CountDown\ Timer/app/**"
-      - "!1.\ CountDown\ Timer/app/**.md"
-      - "!1.\ CountDown\ Timer/app/.gitignore"
-      - "!1.\ CountDown\ Timer/app/.eslintrc.json"
-      - "!1.\ CountDown\ Timer/app/.prettierrc.json"
+      - "1-CountDown-Timer/app/**"
+      - "!1-CountDown-Timer/app/**.md"
+      - "!1-CountDown-Timer/app/.gitignore"
+      - "!1-CountDown-Timer/app/.eslintrc.json"
+      - "!1-CountDown-Timer/app/.prettierrc.json"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -25,7 +25,7 @@ jobs:
     timeout-minutes: 3
 
     env:
-      WORKDIR: '1.\ CountDown\ Timer/app'
+      WORKDIR: 1-CountDown-Timer/app
 
     steps:
       - name: Check out repository
@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      WORKDIR: '1.\ CountDown\ Timer/app'
+      WORKDIR: 1-CountDown-Timer/app
     
     strategy:
       matrix:
@@ -99,10 +99,10 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           working-directory: ${{ env.WORKDIR }}
-          install: false
-          spec: cypress/integration/**/*.spec.ts
-          wait-on: "http://localhost:3000/"
           browser: chrome
+          install: false
+          build: pnpm build
+          start: pnpm start
           headless: true
         env:
           #CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
@@ -117,7 +117,7 @@ jobs:
     if: github.event.pull_request.draft != true
 
     env:
-      WORKDIR: '1.\ CountDown\ Timer/app'
+      WORKDIR: 1-CountDown-Timer/app
 
     steps:
       - name: Check out repository
