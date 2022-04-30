@@ -40,6 +40,7 @@ export default function Home() {
             <input
               className={styles.control}
               placeholder="Event name goes here!"
+              name="name"
             />
           </label>
 
@@ -51,6 +52,7 @@ export default function Home() {
                 min={new Date().toISOString().split('T')[0]}
                 className={styles.control}
                 placeholder="yyyy-mm-dd"
+                name="date"
               />
             </label>
 
@@ -60,6 +62,7 @@ export default function Home() {
                 type="time"
                 placeholder="HH:MM:SS"
                 className={styles.control}
+                name="time"
               />
             </label>
           </div>
@@ -70,6 +73,7 @@ export default function Home() {
               rows={5}
               className={styles.control}
               placeholder="Provide some details about this event"
+              name="description"
             />
           </label>
 
