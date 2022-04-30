@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import EventCard from '../components/EventCard'
+import Heading from '../components/Heading'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -10,9 +12,18 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className="mb-5 text-5xl font-bold">Upcomming events!</h1>
+        <Heading className={styles.title} title="Upcomming events!" />
 
-        <p className={styles.description}>Under construction!</p>
+        <aside className={styles.sidebar}>
+          <div>Featured events</div>
+          <div>Last events</div>
+        </aside>
+
+        <div className={styles.events}>
+          {Array.from({ length: 25 }).map((_, index) => (
+            <EventCard key={index} />
+          ))}
+        </div>
       </main>
     </div>
   )
