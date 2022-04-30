@@ -4,12 +4,15 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
     paths:
-      - "'1. CountDown Timer'/app/**"
-      - "!'1. CountDown Timer'/app/**.md"
-      - "!'1. CountDown Timer'/app/.gitignore"
-      - "!'1. CountDown Timer'/app/.eslintrc.json"
-      - "!'1. CountDown Timer'/app/.prettierrc.json"
+      - "1-CountDown-Timer/app/**"
+      - "!1-CountDown-Timer/app/**.md"
+      - "!1-CountDown-Timer/app/.gitignore"
+      - "!1-CountDown-Timer/app/.eslintrc.json"
+      - "!1-CountDown-Timer/app/.prettierrc.json"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -20,6 +23,10 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     timeout-minutes: 3
+
+    env:
+      WORKDIR: 1-CountDown-Timer/app
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
@@ -31,19 +38,21 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-
-    
+
       - uses: pnpm/action-setup@v2.2.1
         with:
           version: 6.32.4
-          run_install: true 
+          run_install: true
 
-      - name: Use latest version of Node.j
+      - name: Use stable version of Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "*"
+          node-version: ${{ matrix.node-version }}
           cache: "pnpm"
+          cache-dependency-path: ${{ env.WORKDIR }}/pnpm-lock.yaml
 
       - name: Run lint
+        working-directory: ${{ env.WORKDIR }}
         run: pnpm lint
 
 
@@ -52,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      WORKDIR: '1. CountDown Timer/app'
+      WORKDIR: 1-CountDown-Timer/app
     
     strategy:
       matrix:
@@ -73,13 +82,13 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-
-    
+
       - uses: pnpm/action-setup@v2.2.1
         with:
           version: 6.32.4
-          run_install: true 
+          run_install: true
 
-      - name: Use latest version of Node.j
+      - name: Use stable version of Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
@@ -90,10 +99,10 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           working-directory: ${{ env.WORKDIR }}
-          install: false
-          spec: cypress/integration/**/*.spec.ts
-          wait-on: "http://localhost:3000/"
           browser: chrome
+          install: false
+          build: pnpm build
+          start: pnpm start
           headless: true
         env:
           #CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
@@ -108,7 +117,7 @@ jobs:
     if: github.event.pull_request.draft != true
 
     env:
-      WORKDIR: '1. CountDown Timer/app'
+      WORKDIR: 1-CountDown-Timer/app
 
     steps:
       - name: Check out repository
@@ -124,6 +133,7 @@ jobs:
       - uses: pnpm/action-setup@v2.2.1
         with:
           version: 6.32.4
+          run_install: true
 
       - name: Use stable version of Node.js
         uses: actions/setup-node@v3

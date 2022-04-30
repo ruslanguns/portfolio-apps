@@ -8,9 +8,9 @@ I will try to use different technologies and frameworks to build the apps so tha
 
 ## Work in progress
 
-| Project         | Description             | Roadmap                                                            | Source                                      | Deployment                                          |
-| --------------- | ----------------------- | ------------------------------------------------------------------ | ------------------------------------------- | --------------------------------------------------- |
-| Countdown Timer | Counting down timer App | [Project](https://github.com/ruslanguns/portfolio-apps/projects/1) | [Source](/1.%20CountDown%20Timer/README.md) | [Vercel](https://countdown-event-timer.vercel.app/) |
+| Project         | Description             | Roadmap                                                            | Source                                 | Deployment                                          |
+| --------------- | ----------------------- | ------------------------------------------------------------------ | -------------------------------------- | --------------------------------------------------- |
+| Countdown Timer | Counting down timer App | [Project](https://github.com/ruslanguns/portfolio-apps/projects/1) | [Source](/1-CountDown-Timer/README.md) | [Vercel](https://countdown-event-timer.vercel.app/) |
 
 ## Author
 
