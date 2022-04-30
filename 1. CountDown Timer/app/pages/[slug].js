@@ -14,6 +14,10 @@ export default function Home() {
     slug && slug === 'edit' && setIsEdit(true)
   }, [slug])
 
+  if (!slug) {
+    return null
+  }
+
   return (
     <div className={styles.container}>
       <Head>
