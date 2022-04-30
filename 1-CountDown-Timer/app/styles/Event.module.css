@@ -1,6 +1,5 @@
 .container {
-  @apply flex justify-center bg-[#665598];
-  color: white;
+  @apply flex justify-center bg-[#665598] text-white;
 }
 
 .main {
