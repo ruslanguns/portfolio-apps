@@ -4,9 +4,7 @@
 
 .main {
   @apply flex flex-col flex-1 max-w-lg;
-  min-height: 100vh;
   padding: 4rem 0;
-  font-family: 'Inter', sans-serif;
 }
 
 .control {

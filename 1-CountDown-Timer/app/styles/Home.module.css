@@ -1,15 +1,12 @@
 .container {
   @apply flex justify-center bg-[#665598] text-white;
-  width: 100%;
-  font-family: 'Inter', sans-serif;
 }
 
 .main {
   @apply w-full max-w-3xl min-w-fit;
   min-height: 100vh;
   margin-inline: 1rem;
-  position: relative;
-  padding: 4rem 0;
+  padding: 3rem 0;
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-areas:
@@ -20,7 +17,7 @@
 
 .title {
   grid-area: title;
-  margin-block-end: 4rem;
+  margin-block-end: 2rem;
 }
 
 .sidebar {
@@ -28,8 +25,7 @@
   overflow-y: auto;
   scrollbar-width: none; /* Firefox */
   position: sticky;
-  max-height: calc(100vh - 6.5rem);
-  top: 1rem;
+  max-height: calc(88vh - 7rem);
   align-self: start;
 }
 
@@ -54,7 +50,7 @@
   margin-bottom: 1em;
 }
 .events > div:nth-last-child(1) {
-  margin-bottom: 0;
+  margin-bottom: 1em;
 }
 
 @media screen and (max-width: 640px) {
@@ -77,6 +73,7 @@
   }
 
   .events {
+    padding-block-end: 1.5rem;
     margin-right: 0;
   }
 

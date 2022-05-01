@@ -1,0 +1,105 @@
+.container {
+  --bg-primary-shadow: rgba(153, 89, 196, 0.9);
+  --bg-primary: #231625;
+  --bg-item: rgb(240, 240, 240);
+  --bg-item-active: #ffffff;
+  --fab-size: 65px;
+  --item-size: 50px;
+
+  position: fixed;
+  bottom: 0;
+  height: 100px;
+  margin-block-end: 2em;
+  margin-inline-end: 20%;
+  right: 0;
+  user-select: none;
+  width: 100px;
+}
+
+.container:hover {
+  height: 205px;
+}
+
+.container:focus > .button,
+.container:hover > .button {
+  box-shadow: 0 10px 25px var(--bg-primary);
+  transform: translatey(5px);
+  transition: all 0.3s;
+}
+
+.container:hover .item {
+  animation: come-in 0.4s forwards 0.3s;
+}
+
+.button {
+  background-color: var(--bg-primary);
+  border-radius: 50%;
+  bottom: 0;
+  box-shadow: 0 10px 25px -5px var(--bg-primary);
+  color: white;
+  cursor: pointer;
+  font-size: 25px;
+  height: var(--fab-size);
+  left: 0;
+  line-height: var(--fab-size);
+  margin: auto;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  transition: all 0.3s;
+  user-select: none;
+  width: var(--fab-size);
+  z-index: 100;
+}
+
+.item {
+  background-color: var(--bg-item);
+  border-radius: 50%;
+  box-shadow: 0 20px 20px -10px rgba(255, 255, 255, 0.5);
+  color: black;
+  display: block;
+  font-weight: 500;
+  height: var(--item-size);
+  line-height: var(--item-size);
+  margin: 15px auto;
+  opacity: 0;
+  position: relative;
+  text-align: center;
+  transform: translateY(100px);
+  transition: all 0.3s;
+  width: var(--item-size);
+  z-index: 0;
+}
+
+.item:hover,
+.item:focus {
+  background-color: var(--bg-item-active);
+  box-shadow: 0 20px 20px -10px var(--bg-item);
+  cursor: pointer;
+}
+
+@keyframes come-in {
+  0% {
+    opacity: 0;
+    transform: translatey(100px);
+  }
+
+  30% {
+    transform: translateX(-25px) scale(0.4);
+  }
+
+  70% {
+    transform: translateX(0px) scale(1.2);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translatey(0px) scale(1);
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .container {
+    margin-inline-end: 1em;
+  }
+}

@@ -5,6 +5,7 @@ import FilteredEvent from '../components/FilteredEvent'
 import Heading from '../components/Heading'
 import styles from '../styles/Home.module.css'
 import { EVENTS_MOCK } from '../shared/constants'
+import FloatingButton from '../components/FloatingButton'
 
 export default function Home() {
   return (
@@ -39,6 +40,7 @@ export default function Home() {
           )}
         </div>
       </main>
+      <FloatingButton />
     </div>
   )
 }
