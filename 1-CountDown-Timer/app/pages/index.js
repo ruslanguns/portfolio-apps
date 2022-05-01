@@ -1,7 +1,31 @@
 import Head from 'next/head'
+import CollapsableFilter from '../components/CollapsableFilter'
 import EventCard from '../components/EventCard'
 import Heading from '../components/Heading'
 import styles from '../styles/Home.module.css'
+
+const mockEvents = [
+  {
+    label: 'My birthday',
+    date: new Date('2022-08-21'),
+  },
+  {
+    label: 'Neryad stream',
+    date: new Date('2022-05-06T12:03:34'),
+  },
+  {
+    label: 'Fiesta en la playa',
+    date: new Date('2022-05-06T12:03:34'),
+  },
+  {
+    label: 'Aniversary',
+    date: new Date('2022-10-10T12:06:21'),
+  },
+  {
+    label: 'New year',
+    date: new Date('2022-12-31'),
+  },
+]
 
 export default function Home() {
   return (
@@ -15,11 +39,13 @@ export default function Home() {
         <Heading className={styles.title} title="Upcomming events!" />
 
         <aside className={styles.sidebar}>
-          <div>Featured events</div>
-          <div>Last events</div>
-          <div>Other filters</div>
-          <div>Other filters</div>
-          <div>Other filters</div>
+          <CollapsableFilter label="Featured events" items={mockEvents} />
+
+          <CollapsableFilter label="Last events added" items={mockEvents} />
+
+          <CollapsableFilter label="Events by category" items={mockEvents} />
+
+          <CollapsableFilter label="Events by location" items={mockEvents} />
         </aside>
 
         <div className={styles.events}>
