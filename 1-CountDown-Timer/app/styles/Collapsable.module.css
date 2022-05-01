@@ -1,6 +1,7 @@
 .collapsable {
   margin: 0 auto;
   max-width: 90%;
+  user-select: none;
 }
 
 .label {
@@ -32,4 +33,9 @@
   padding: 0.4rem;
   font-weight: 500;
   font-size: smaller;
+}
+
+.item > span:nth-last-child(1) {
+  margin-left: 1em;
+  font-size: 0.7rem;
 }

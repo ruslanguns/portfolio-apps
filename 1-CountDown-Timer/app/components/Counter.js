@@ -1,5 +1,5 @@
+import useTimeLeft from '../shared/hooks/useTimeLeft'
 import styles from '../styles/Counter.module.css'
-import useTimeLeft from '../hooks/useTimeLeft'
 
 const CounterBlock = ({ label, value }) => {
   return (

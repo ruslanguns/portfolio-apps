@@ -1,31 +1,10 @@
 import Head from 'next/head'
-import CollapsableFilter from '../components/CollapsableFilter'
+import Collapsable from '../components/Collapsable'
 import EventCard from '../components/EventCard'
+import FilteredEvent from '../components/FilteredEvent'
 import Heading from '../components/Heading'
 import styles from '../styles/Home.module.css'
-
-const mockEvents = [
-  {
-    label: 'My birthday',
-    date: new Date('2022-08-21'),
-  },
-  {
-    label: 'Neryad stream',
-    date: new Date('2022-05-06T12:03:34'),
-  },
-  {
-    label: 'Fiesta en la playa',
-    date: new Date('2022-05-06T12:03:34'),
-  },
-  {
-    label: 'Aniversary',
-    date: new Date('2022-10-10T12:06:21'),
-  },
-  {
-    label: 'New year',
-    date: new Date('2022-12-31'),
-  },
-]
+import { EVENTS_MOCK } from '../shared/constants'
 
 export default function Home() {
   return (
@@ -39,28 +18,25 @@ export default function Home() {
         <Heading className={styles.title} title="Upcomming events!" />
 
         <aside className={styles.sidebar}>
-          <CollapsableFilter label="Featured events" items={mockEvents} />
+          <Collapsable label="Featured events">
+            {EVENTS_MOCK.map((item, idx) => (
+              <FilteredEvent key={idx} label={item.name} date={item.date} />
+            ))}
+          </Collapsable>
 
-          <CollapsableFilter label="Last events added" items={mockEvents} />
-
-          <CollapsableFilter label="Events by category" items={mockEvents} />
-
-          <CollapsableFilter label="Events by location" items={mockEvents} />
+          <Collapsable label="Last events added">
+            {EVENTS_MOCK.map((item, idx) => (
+              <FilteredEvent key={idx} label={item.name} date={item.date} />
+            ))}
+          </Collapsable>
         </aside>
 
         <div className={styles.events}>
-          {[
-            new Date('2022-05-08T15:00:53'),
-            new Date('2022-05-06T12:03:34'),
-            new Date('2022-08-21T12:05:15'),
-            new Date('2022-12-31T12:27:24'),
-            new Date('2022-10-10T12:06:21'),
-            new Date('2022-11-06'),
-          ]
-            .sort((a, b) => a - b)
-            .map((date, index) => (
-              <EventCard key={index} date={date} />
-            ))}
+          {EVENTS_MOCK.sort((a, b) => a.date - b.date).map(
+            ({ date, name }, index) => (
+              <EventCard key={index} date={date} name={name} />
+            )
+          )}
         </div>
       </main>
     </div>
