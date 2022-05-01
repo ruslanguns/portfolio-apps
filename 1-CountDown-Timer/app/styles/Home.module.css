@@ -28,7 +28,7 @@
   overflow-y: auto;
   scrollbar-width: none; /* Firefox */
   position: sticky;
-  height: calc(100vh - 6.5rem);
+  max-height: calc(100vh - 6.5rem);
   top: 1rem;
   align-self: start;
 }
@@ -37,25 +37,23 @@
   display: none; /* Safari and Chrome */
 }
 
-.sidebar div {
-  height: 220px;
+.sidebar > div {
   margin-bottom: 1em;
-  background: rgba(0, 0, 0, 0.5);
 }
 
-.sidebar div:nth-last-child(1) {
+.sidebar > div:nth-last-child(1) {
   margin-bottom: 0;
 }
 
 .events {
   grid-area: events;
-  margin-right: 1em;
+  margin-right: 2em;
 }
 
-.events div {
+.events > div {
   margin-bottom: 1em;
 }
-.events div:nth-last-child(1) {
+.events > div:nth-last-child(1) {
   margin-bottom: 0;
 }
 
@@ -82,7 +80,7 @@
     margin-right: 0;
   }
 
-  .events div:nth-child(1) {
+  .events > div:nth-child(1) {
     margin-top: 1em;
   }
 }
