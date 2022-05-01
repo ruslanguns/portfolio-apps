@@ -17,6 +17,9 @@ export default function Home() {
         <aside className={styles.sidebar}>
           <div>Featured events</div>
           <div>Last events</div>
+          <div>Other filters</div>
+          <div>Other filters</div>
+          <div>Other filters</div>
         </aside>
 
         <div className={styles.events}>

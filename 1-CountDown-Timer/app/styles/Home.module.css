@@ -8,6 +8,7 @@
   @apply w-full max-w-3xl min-w-fit;
   min-height: 100vh;
   margin-inline: 1rem;
+  position: relative;
   padding: 4rem 0;
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -24,9 +25,16 @@
 
 .sidebar {
   grid-area: sidebar;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
   position: sticky;
+  height: calc(100vh - 6.5rem);
   top: 1rem;
   align-self: start;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
 .sidebar div {
