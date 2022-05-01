@@ -23,9 +23,18 @@ export default function Home() {
         </aside>
 
         <div className={styles.events}>
-          {Array.from({ length: 25 }).map((_, index) => (
-            <EventCard key={index} />
-          ))}
+          {[
+            new Date('2022-05-08T15:00:53'),
+            new Date('2022-05-06T12:03:34'),
+            new Date('2022-08-21T12:05:15'),
+            new Date('2022-12-31T12:27:24'),
+            new Date('2022-10-10T12:06:21'),
+            new Date('2022-11-06'),
+          ]
+            .sort((a, b) => a - b)
+            .map((date, index) => (
+              <EventCard key={index} date={date} />
+            ))}
         </div>
       </main>
     </div>

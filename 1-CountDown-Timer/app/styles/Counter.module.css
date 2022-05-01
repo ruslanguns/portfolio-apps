@@ -1,0 +1,43 @@
+.counter {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0.25rem !important;
+}
+
+.counter div {
+  margin: 0;
+  margin-right: 0.5rem;
+  margin-block: 0 !important;
+}
+
+.counter div span {
+  display: block;
+}
+
+/* Números del contador */
+.counter div span:nth-child(1) {
+  font-size: 45px;
+  line-height: 40px;
+  padding-top: 0.25rem;
+}
+
+/* Letras del contador */
+.counter div span:nth-last-child(1) {
+  font-size: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Separador del contador : */
+.counter div:nth-child(even) > span {
+  font-size: 40px !important;
+  line-height: 35px !important;
+}
+
+@media screen and (max-width: 480px) {
+  .counter {
+    margin-top: 2rem;
+    zoom: 75%;
+  }
+}
