@@ -2,7 +2,11 @@
 
 describe('Add Event Form', () => {
   beforeEach(() => {
-    cy.visit('/add')
+    cy.visit('/add', {
+      onBeforeLoad(win) {
+        cy.stub(win.console, 'log').as('consoleLog')
+      },
+    })
   })
 
   it('should display a heading', () => {
@@ -35,5 +39,24 @@ describe('Add Event Form', () => {
 
   it('should be displayed the submit button', () => {
     cy.get('button').should('contain', 'Start')
+  })
+
+  it('should be able to use the form', () => {
+    const testDate = new Date()
+    const validDate = testDate.toISOString().split('T')[0]
+    const validTime = new Intl.DateTimeFormat('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: false,
+      timeZone: 'UTC',
+    }).format(Date.now())
+
+    cy.get('input[name=name]').type('Test Event')
+    cy.get('input[name=date]').type(validDate)
+    cy.get('input[name=time]').type(validTime)
+    cy.get('textarea[name=description]').type(`${'Testing data'}{enter}`)
+    cy.get('button').click()
+
+    cy.get('@consoleLog').should('be.calledOnce')
   })
 })
