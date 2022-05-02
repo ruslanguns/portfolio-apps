@@ -6,6 +6,7 @@ import Heading from '../components/Heading'
 import styles from '../styles/Home.module.css'
 import { EVENTS_MOCK } from '../shared/constants'
 import FloatingButton from '../components/FloatingButton'
+import AddIcon from '../components/icons/AddIcon'
 
 export default function Home() {
   return (
@@ -40,7 +41,14 @@ export default function Home() {
           )}
         </div>
       </main>
-      <FloatingButton />
+      <FloatingButton
+        options={[
+          {
+            icon: AddIcon,
+            href: '/add',
+          },
+        ]}
+      />
     </div>
   )
 }
