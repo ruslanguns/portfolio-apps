@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import styles from '../styles/Event.module.css'
@@ -9,6 +10,7 @@ export default function Home() {
   const router = useRouter()
   const { slug } = router.query
   const [isEdit, setIsEdit] = useState(false)
+  const { register, handleSubmit } = useForm()
 
   useEffect(() => {
     slug && slug !== 'add' && setIsEdit(true)
@@ -16,6 +18,10 @@ export default function Home() {
 
   if (!slug) {
     return null
+  }
+
+  const onSubmit = (data) => {
+    console.log(data)
   }
 
   return (
@@ -26,18 +32,19 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Heading icon={BackIcon} title="Submit an event" />
+        <Heading icon={BackIcon} backHref="/" title="Submit an event" />
 
         <small>All fields with an asterisk (*) are mandatory.</small>
 
         <form
+          onSubmit={handleSubmit(onSubmit)}
           autoComplete="off"
           className="left-0 flex flex-col w-full gap-3 mt-4 text-sm sm:mx-0 sm:-left-36"
-          onSubmit={(e) => e.preventDefault()}
         >
           <label className="w-full">
             <span className="text-sm">Name *</span>
             <input
+              {...register('name')}
               className={styles.control}
               placeholder="Event name goes here!"
               name="name"
@@ -48,6 +55,7 @@ export default function Home() {
             <label className="w-full">
               <span className="text-sm">Date *</span>
               <input
+                {...register('date')}
                 type="date"
                 min={new Date().toISOString().split('T')[0]}
                 className={styles.control}
@@ -59,6 +67,7 @@ export default function Home() {
             <label className="w-full">
               <span className="text-sm">Time</span>
               <input
+                {...register('time')}
                 type="time"
                 placeholder="HH:MM:SS"
                 className={styles.control}
@@ -70,6 +79,7 @@ export default function Home() {
           <label className="w-full">
             <span className="text-sm">Description</span>
             <textarea
+              {...register('description')}
               rows={5}
               className={styles.control}
               placeholder="Provide some details about this event"
