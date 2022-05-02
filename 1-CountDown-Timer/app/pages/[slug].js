@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import styles from '../styles/Event.module.css'
-import BackIcon from '../components/icons/BackIcon'
+import { useEffect, useState } from 'react'
 import Heading from '../components/Heading'
+import BackIcon from '../components/icons/BackIcon'
+import useEventForm from '../shared/hooks/useEventForm'
+import styles from '../styles/Event.module.css'
 
 export default function Home() {
   const router = useRouter()
   const { slug } = router.query
   const [isEdit, setIsEdit] = useState(false)
+  const { onSubmit, handleSubmit, register } = useEventForm()
 
   useEffect(() => {
     slug && slug !== 'add' && setIsEdit(true)
@@ -26,21 +28,21 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Heading icon={BackIcon} title="Submit an event" />
+        <Heading icon={BackIcon} backHref="/" title="Submit an event" />
 
         <small>All fields with an asterisk (*) are mandatory.</small>
 
         <form
+          onSubmit={handleSubmit(onSubmit)}
           autoComplete="off"
           className="left-0 flex flex-col w-full gap-3 mt-4 text-sm sm:mx-0 sm:-left-36"
-          onSubmit={(e) => e.preventDefault()}
         >
           <label className="w-full">
             <span className="text-sm">Name *</span>
             <input
+              {...register('name')}
               className={styles.control}
               placeholder="Event name goes here!"
-              name="name"
             />
           </label>
 
@@ -48,21 +50,19 @@ export default function Home() {
             <label className="w-full">
               <span className="text-sm">Date *</span>
               <input
+                {...register('date')}
                 type="date"
-                min={new Date().toISOString().split('T')[0]}
                 className={styles.control}
-                placeholder="yyyy-mm-dd"
-                name="date"
+                min={new Date().toISOString().split('T')[0]} // 2022-05-02
               />
             </label>
 
             <label className="w-full">
               <span className="text-sm">Time</span>
               <input
-                type="time"
-                placeholder="HH:MM:SS"
+                {...register('time')}
                 className={styles.control}
-                name="time"
+                type="time"
               />
             </label>
           </div>
@@ -70,10 +70,10 @@ export default function Home() {
           <label className="w-full">
             <span className="text-sm">Description</span>
             <textarea
+              {...register('description')}
               rows={5}
               className={styles.control}
               placeholder="Provide some details about this event"
-              name="description"
             />
           </label>
 

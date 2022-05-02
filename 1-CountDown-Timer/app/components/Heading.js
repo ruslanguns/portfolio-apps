@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import Title from './Title'
 
-const Heading = ({ icon: Icon, title, ...props }) => {
+const Heading = ({ icon: Icon, title, backHref = '/', ...props }) => {
   const router = useRouter()
 
   return (
@@ -11,7 +11,7 @@ const Heading = ({ icon: Icon, title, ...props }) => {
     >
       {Icon && (
         <Icon
-          onClick={() => router.push('/')}
+          onClick={() => router.push(backHref)}
           className="left-0 w-12 h-12 mr-3 sm:absolute sm:inline sm:-left-24 sm:w-14 sm:h-14 hover:cursor-pointer"
         />
       )}

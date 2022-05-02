@@ -11,6 +11,7 @@ specifiers:
   postcss: 8.4.12
   react: 18.1.0
   react-dom: 18.1.0
+  react-hook-form: ^7.30.0
   react-responsive: ^9.0.0-beta.6
   start-server-and-test: ^1.14.0
   tailwindcss: 3.0.24
@@ -22,6 +23,7 @@ dependencies:
   next: 12.1.5_react-dom@18.1.0+react@18.1.0
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
+  react-hook-form: 7.30.0_react@18.1.0
   react-responsive: 9.0.0-beta.6_react@18.1.0
   start-server-and-test: 1.14.0
 
@@ -2506,6 +2508,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.1.0
       scheduler: 0.22.0
+    dev: false
+
+  /react-hook-form/7.30.0_react@18.1.0:
+    resolution: {integrity: sha512-DzjiM6o2vtDGNMB9I4yCqW8J21P314SboNG1O0obROkbg7KVS0I7bMtwSdKyapnCPjHgnxc3L7E5PEdISeEUcQ==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.1.0
     dev: false
 
   /react-is/16.13.1:
