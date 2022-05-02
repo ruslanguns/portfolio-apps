@@ -1,9 +1,7 @@
 import { useState } from 'react'
-import useDurationLeft from '../shared/hooks/useDurationLeft'
 import styles from '../styles/Collapsable.module.css'
 
 const Collapsable = ({ label, children }) => {
-  useDurationLeft()
   const [isOpen, setIsOpen] = useState(true)
 
   const toggle = () => setIsOpen(!isOpen)
