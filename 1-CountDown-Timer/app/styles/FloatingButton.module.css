@@ -1,6 +1,6 @@
 .container {
   --bg-primary-shadow: rgba(153, 89, 196, 0.9);
-  --bg-primary: #231625;
+  --bg-primary: #d043e5;
   --bg-item: rgb(240, 240, 240);
   --bg-item-active: #ffffff;
   --fab-size: 65px;
@@ -17,7 +17,7 @@
 }
 
 .container:hover {
-  height: 205px;
+  height: 140px;
 }
 
 .container:focus > .button,
@@ -37,7 +37,6 @@
   bottom: 0;
   box-shadow: 0 10px 25px -5px var(--bg-primary);
   color: white;
-  cursor: pointer;
   font-size: 25px;
   height: var(--fab-size);
   left: 0;
