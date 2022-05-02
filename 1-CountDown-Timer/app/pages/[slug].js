@@ -1,28 +1,11 @@
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
-import styles from '../styles/Event.module.css'
-import BackIcon from '../components/icons/BackIcon'
 import Heading from '../components/Heading'
+import BackIcon from '../components/icons/BackIcon'
+import useEventForm from '../shared/hooks/useEventForm'
+import styles from '../styles/Event.module.css'
 
 export default function Home() {
-  const router = useRouter()
-  const { slug } = router.query
-  const [isEdit, setIsEdit] = useState(false)
-  const { register, handleSubmit } = useForm()
-
-  useEffect(() => {
-    slug && slug !== 'add' && setIsEdit(true)
-  }, [slug])
-
-  if (!slug) {
-    return null
-  }
-
-  const onSubmit = (data) => {
-    console.log(data)
-  }
+  const { isEdit, onSubmit, handleSubmit, register } = useEventForm()
 
   return (
     <div className={styles.container}>
@@ -47,7 +30,6 @@ export default function Home() {
               {...register('name')}
               className={styles.control}
               placeholder="Event name goes here!"
-              name="name"
             />
           </label>
 
@@ -57,10 +39,8 @@ export default function Home() {
               <input
                 {...register('date')}
                 type="date"
-                min={new Date().toISOString().split('T')[0]}
                 className={styles.control}
-                placeholder="yyyy-mm-dd"
-                name="date"
+                min={new Date().toISOString().split('T')[0]} // 2022-05-02
               />
             </label>
 
@@ -68,10 +48,8 @@ export default function Home() {
               <span className="text-sm">Time</span>
               <input
                 {...register('time')}
-                type="time"
-                placeholder="HH:MM:SS"
                 className={styles.control}
-                name="time"
+                type="time"
               />
             </label>
           </div>
@@ -83,7 +61,6 @@ export default function Home() {
               rows={5}
               className={styles.control}
               placeholder="Provide some details about this event"
-              name="description"
             />
           </label>
 
