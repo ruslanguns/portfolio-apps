@@ -1,5 +1,12 @@
 import Head from 'next/head'
+import Collapsable from '../components/Collapsable'
+import EventCard from '../components/EventCard'
+import FilteredEvent from '../components/FilteredEvent'
+import Heading from '../components/Heading'
 import styles from '../styles/Home.module.css'
+import { EVENTS_MOCK } from '../shared/constants'
+import FloatingButton from '../components/FloatingButton'
+import AddIcon from '../components/icons/AddIcon'
 
 export default function Home() {
   return (
@@ -10,10 +17,38 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className="mb-5 text-5xl font-bold">Upcomming events!</h1>
+        <Heading className={styles.title} title="Upcomming events!" />
 
-        <p className={styles.description}>Under construction!</p>
+        <aside className={styles.sidebar}>
+          <Collapsable label="Featured events">
+            {EVENTS_MOCK.map((item, idx) => (
+              <FilteredEvent key={idx} label={item.name} date={item.date} />
+            ))}
+          </Collapsable>
+
+          <Collapsable label="Last events added">
+            {EVENTS_MOCK.map((item, idx) => (
+              <FilteredEvent key={idx} label={item.name} date={item.date} />
+            ))}
+          </Collapsable>
+        </aside>
+
+        <div className={styles.events}>
+          {EVENTS_MOCK.sort((a, b) => a.date - b.date).map(
+            ({ date, name }, index) => (
+              <EventCard key={index} date={date} name={name} />
+            )
+          )}
+        </div>
       </main>
+      <FloatingButton
+        options={[
+          {
+            icon: AddIcon,
+            href: '/add',
+          },
+        ]}
+      />
     </div>
   )
 }

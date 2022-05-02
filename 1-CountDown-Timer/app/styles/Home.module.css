@@ -1,13 +1,83 @@
 .container {
-  padding: 0 2rem;
+  @apply flex justify-center bg-[#665598] text-white;
 }
 
 .main {
+  @apply w-full max-w-3xl min-w-fit;
   min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  margin-inline: 1rem;
+  padding: 3rem 0;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas:
+    'title title'
+    'events sidebar'
+    'events sidebar';
+}
+
+.title {
+  grid-area: title;
+  margin-block-end: 2rem;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  position: sticky;
+  max-height: calc(88vh - 7rem);
+  align-self: start;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.sidebar > div {
+  margin-bottom: 1em;
+}
+
+.sidebar > div:nth-last-child(1) {
+  margin-bottom: 0;
+}
+
+.events {
+  grid-area: events;
+  margin-right: 2em;
+}
+
+.events > div {
+  margin-bottom: 1em;
+}
+.events > div:nth-last-child(1) {
+  margin-bottom: 1em;
+}
+
+@media screen and (max-width: 640px) {
+  .main {
+    margin-inline: 0.5rem;
+    grid-template-areas:
+      'title title'
+      'sidebar sidebar'
+      'events events';
+  }
+
+  .sidebar {
+    position: relative;
+    align-self: normal;
+    top: 0;
+  }
+
+  .title {
+    margin-block-end: 2rem;
+  }
+
+  .events {
+    padding-block-end: 1.5rem;
+    margin-right: 0;
+  }
+
+  .events > div:nth-child(1) {
+    margin-top: 1em;
+  }
 }
