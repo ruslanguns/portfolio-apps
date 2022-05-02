@@ -1,8 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import useResponsiveMQ from '../shared/hooks/useResponsiveMQ'
 import styles from '../styles/Collapsable.module.css'
 
 const Collapsable = ({ label, children }) => {
+  const { isSmall } = useResponsiveMQ()
   const [isOpen, setIsOpen] = useState(true)
+
+  useEffect(() => {
+    console.log('isSmall:', isSmall)
+    isSmall && setIsOpen(false)
+  }, [isSmall])
 
   const toggle = () => setIsOpen(!isOpen)
 

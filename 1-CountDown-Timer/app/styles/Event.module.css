@@ -1,6 +1,6 @@
 .container {
   @apply flex justify-center bg-[#665598] text-white;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .main {
