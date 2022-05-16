@@ -57,6 +57,20 @@ describe('Add Event Form', () => {
     cy.get('textarea[name=description]').type(`${'Testing data'}{enter}`)
     cy.get('button').click()
 
+    // FIXME: when form is implemented
     cy.get('@consoleLog').should('be.calledOnce')
+  })
+
+  it('name should be a required field', () => {
+    cy.get('button').click()
+
+    // FIXME: when form is implemented
+    cy.get('@consoleLog').should('not.be.calledOnce')
+  })
+
+  it('should have a warning message if name is invalid', () => {
+    cy.get('button').click()
+
+    cy.get('small').should('contain', 'name is a required field')
   })
 })
