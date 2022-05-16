@@ -10,7 +10,12 @@ export default function Home() {
   const router = useRouter()
   const { slug } = router.query
   const [isEdit, setIsEdit] = useState(false)
-  const { onSubmit, handleSubmit, register } = useEventForm()
+  const {
+    onSubmit,
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useEventForm()
 
   useEffect(() => {
     slug && slug !== 'add' && setIsEdit(true)
@@ -41,9 +46,14 @@ export default function Home() {
             <span className="text-sm">Name *</span>
             <input
               {...register('name')}
-              className={styles.control}
+              className={`${styles.control} ${errors.name && styles.error}`}
               placeholder="Event name goes here!"
             />
+            {errors.name && (
+              <small className="text-red-500 text-shadow-md">
+                {errors.name?.message}{' '}
+              </small>
+            )}
           </label>
 
           <div className="flex flex-col justify-between w-full gap-2 sm:flex-row ">
