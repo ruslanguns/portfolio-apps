@@ -9,7 +9,10 @@ const schema = yup
       .date()
       .nullable()
       .typeError('date is invalid')
-      .min(new Date(), 'date field must be later than now()')
+      .min(
+        new Date(Date.now() - 1000 * 60 * 60 * 24),
+        'date field must be later than now()'
+      )
       .required(),
   })
   .required()
