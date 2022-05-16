@@ -73,4 +73,34 @@ describe('Add Event Form', () => {
 
     cy.get('small').should('contain', 'name is a required field')
   })
+
+  it('date should be a required field', () => {
+    cy.get('input[name=name]').type('Test Event')
+
+    cy.get('button').click()
+
+    // FIXME: when form is implemented
+    cy.get('@consoleLog').should('not.be.calledOnce')
+  })
+
+  it('should have a warning message if date is invalid', () => {
+    cy.get('input[name=name]').type('Test Event')
+
+    cy.get('button').click()
+
+    cy.get('small').should('contain', 'date is invalid')
+  })
+
+  it('should have a warning message if date is before now', () => {
+    const testDate = new Date(Date.now() - 1000 * 60 * 60 * 24)
+      .toISOString()
+      .split('T')[0]
+
+    cy.get('input[name=name]').type('Test Event')
+    cy.get('input[name=date]').type(testDate)
+
+    cy.get('button').click()
+
+    cy.get('small').should('contain', 'date field must be later than now()')
+  })
 })

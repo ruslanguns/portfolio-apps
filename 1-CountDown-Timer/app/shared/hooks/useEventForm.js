@@ -5,6 +5,12 @@ import * as yup from 'yup'
 const schema = yup
   .object({
     name: yup.string().max(40).required(),
+    date: yup
+      .date()
+      .nullable()
+      .typeError('date is invalid')
+      .min(new Date(), 'date field must be later than now()')
+      .required(),
   })
   .required()
 

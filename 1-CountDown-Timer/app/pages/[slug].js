@@ -39,6 +39,7 @@ export default function Home() {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
+          noValidate
           autoComplete="off"
           className="left-0 flex flex-col w-full gap-3 mt-4 text-sm sm:mx-0 sm:-left-36"
         >
@@ -51,7 +52,7 @@ export default function Home() {
             />
             {errors.name && (
               <small className="text-red-500 text-shadow-md">
-                {errors.name?.message}{' '}
+                {errors.name?.message}
               </small>
             )}
           </label>
@@ -62,9 +63,14 @@ export default function Home() {
               <input
                 {...register('date')}
                 type="date"
-                className={styles.control}
+                className={`${styles.control} ${errors.date && styles.error}`}
                 min={new Date().toISOString().split('T')[0]} // 2022-05-02
               />
+              {errors.date && (
+                <small className="text-red-500 text-shadow-md">
+                  {errors.date?.message}
+                </small>
+              )}
             </label>
 
             <label className="w-full">
