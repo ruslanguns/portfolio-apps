@@ -14,6 +14,10 @@ export default function timeValidation(value, context) {
     return false
   }
 
+  if (!value) {
+    return true
+  }
+
   const date = new Date(context.parent.date).getTime()
   const now = new Date()
   const isTodayDate = isToday(date)
