@@ -103,4 +103,23 @@ describe('Add Event Form', () => {
 
     cy.get('small').should('contain', 'date must be at least from today')
   })
+
+  it('should have a warning message if time is before when is today', () => {
+    const now = new Date()
+    const todayDate = new Date(now).toISOString().split('T')[0]
+    const oneMinuteAgo = new Intl.DateTimeFormat('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: false,
+      timeZone: 'UTC',
+    }).format(now.getTime() - 1000)
+
+    cy.get('input[name=name]').type('Test Event')
+    cy.get('input[name=date]').type(todayDate)
+    cy.get('input[name=time]').type(oneMinuteAgo)
+
+    cy.get('button').click()
+
+    cy.get('small').should('contain', 'time must be later than now()')
+  })
 })
