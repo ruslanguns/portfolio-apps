@@ -27,7 +27,7 @@ describe('Add Event Form', () => {
     cy.get('input[name="date"]').should('be.visible')
   })
 
-  it('should be displayed the date input field', () => {
+  it('should be displayed the time input field', () => {
     cy.get('label').should('contain', 'Time')
     cy.get('input[name="date"]').should('be.visible')
   })
@@ -42,14 +42,14 @@ describe('Add Event Form', () => {
   })
 
   it('should be able to use the form', () => {
-    const testDate = new Date()
+    const testDate = new Date(Date.now() + 1000 * 60 * 60 * 24)
     const validDate = testDate.toISOString().split('T')[0]
     const validTime = new Intl.DateTimeFormat('en-US', {
       hour: 'numeric',
       minute: 'numeric',
       hour12: false,
       timeZone: 'UTC',
-    }).format(Date.now())
+    }).format(testDate.getTime())
 
     cy.get('input[name=name]').type('Test Event')
     cy.get('input[name=date]').type(validDate)
@@ -83,12 +83,12 @@ describe('Add Event Form', () => {
     cy.get('@consoleLog').should('not.be.calledOnce')
   })
 
-  it('should have a warning message if date is invalid', () => {
+  it('should have a warning message if date is missing or is invalid', () => {
     cy.get('input[name=name]').type('Test Event')
 
     cy.get('button').click()
 
-    cy.get('small').should('contain', 'date is invalid')
+    cy.get('small').should('contain', 'date is missing or is invalid')
   })
 
   it('should have a warning message if date is before now', () => {
@@ -101,6 +101,6 @@ describe('Add Event Form', () => {
 
     cy.get('button').click()
 
-    cy.get('small').should('contain', 'date field must be later than now()')
+    cy.get('small').should('contain', 'date must be at least from today')
   })
 })
