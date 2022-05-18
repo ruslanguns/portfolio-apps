@@ -77,9 +77,14 @@ export default function Home() {
               <span className="text-sm">Time</span>
               <input
                 {...register('time')}
-                className={styles.control}
+                className={`${styles.control} ${errors.time && styles.error}`}
                 type="time"
               />
+              {errors.time && (
+                <small className="text-red-500 text-shadow-md">
+                  {errors.time?.message}
+                </small>
+              )}
             </label>
           </div>
 

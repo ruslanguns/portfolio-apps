@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import timeValidation from '../helpers/timeValidation'
 
 const schema = yup
   .object({
@@ -8,12 +9,15 @@ const schema = yup
     date: yup
       .date()
       .nullable()
-      .typeError('date is invalid')
+      .typeError('date is missing or is invalid')
       .min(
         new Date(Date.now() - 1000 * 60 * 60 * 24),
-        'date field must be later than now()'
+        'date must be at least from today'
       )
       .required(),
+    time: yup
+      .string()
+      .test('onTime', '${path} must be later than now()', timeValidation),
   })
   .required()
 
