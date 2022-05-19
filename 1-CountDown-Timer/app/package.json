@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
+    "cypress:run": "cypress run --record --key 84dd7be3-d0fe-4b0d-ab9b-d32a21ec90e4",
     "e2e": "start-server-and-test start http://localhost:3000 cypress:open",
     "e2e:headless": "start-server-and-test start http://localhost:3000 cypress:run"
   },
