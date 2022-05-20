@@ -4,11 +4,19 @@ import EventCard from '../components/EventCard'
 import FilteredEvent from '../components/FilteredEvent'
 import Heading from '../components/Heading'
 import styles from '../styles/Home.module.css'
-import { EVENTS_MOCK } from '../shared/constants'
 import FloatingButton from '../components/FloatingButton'
 import AddIcon from '../components/icons/AddIcon'
+import { GlobalStoreContext } from '../shared/contexts/globalStore'
+import { useContext, useEffect, useState } from 'react'
 
 export default function Home() {
+  const [eventos, setEventos] = useState([])
+  const { state } = useContext(GlobalStoreContext)
+
+  useEffect(() => {
+    setEventos(state.eventos)
+  }, [state.eventos])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -19,27 +27,31 @@ export default function Home() {
       <main className={styles.main}>
         <Heading className={styles.title} title="Upcomming events!" />
 
-        <aside className={styles.sidebar}>
-          <Collapsable label="Featured events">
-            {EVENTS_MOCK.map((item, idx) => (
-              <FilteredEvent key={idx} label={item.name} date={item.date} />
-            ))}
-          </Collapsable>
+        {eventos.length > 0 && (
+          <>
+            <aside className={styles.sidebar}>
+              <Collapsable label="Featured events">
+                {eventos.map((item, idx) => (
+                  <FilteredEvent key={idx} label={item.name} date={item.date} />
+                ))}
+              </Collapsable>
 
-          <Collapsable label="Last events added">
-            {EVENTS_MOCK.map((item, idx) => (
-              <FilteredEvent key={idx} label={item.name} date={item.date} />
-            ))}
-          </Collapsable>
-        </aside>
+              <Collapsable label="Last events added">
+                {eventos.map((item, idx) => (
+                  <FilteredEvent key={idx} label={item.name} date={item.date} />
+                ))}
+              </Collapsable>
+            </aside>
 
-        <div className={styles.events}>
-          {EVENTS_MOCK.sort((a, b) => a.date - b.date).map(
-            ({ date, name }, index) => (
-              <EventCard key={index} date={date} name={name} />
-            )
-          )}
-        </div>
+            <div className={styles.events}>
+              {eventos
+                .sort((a, b) => a.date - b.date)
+                .map(({ date, name }, index) => (
+                  <EventCard key={index} date={date} name={name} />
+                ))}
+            </div>
+          </>
+        )}
       </main>
       <FloatingButton
         options={[
@@ -52,3 +64,13 @@ export default function Home() {
     </div>
   )
 }
+
+// export async function getServerSideProps() {
+//   // Fetch data from external API
+//   const res = await fetch(`http://localhost:3000/api`)
+//   const { data } = await res.json()
+
+//   console.log(data)
+
+//   return { props: { _eventos: data } }
+// }
