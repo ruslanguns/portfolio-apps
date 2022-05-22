@@ -31,6 +31,8 @@ const useEventForm = () => {
   const { state, setState } = useContext(GlobalStoreContext)
 
   const onSubmit = async (body) => {
+    console.log({ body })
+
     const response = await fetch('/api', {
       method: 'POST',
       headers: {

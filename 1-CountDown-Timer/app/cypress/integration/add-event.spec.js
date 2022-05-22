@@ -2,6 +2,8 @@
 
 describe('Add Event Form', () => {
   beforeEach(() => {
+    cy.clock(new Date('2022-05-01'), ['Date'])
+
     cy.visit('/add', {
       onBeforeLoad(win) {
         cy.stub(win.console, 'log').as('consoleLog')
@@ -41,27 +43,29 @@ describe('Add Event Form', () => {
     cy.get('button').should('contain', 'Start')
   })
 
-  it('should be able to use the form', () => {
-    const testDate = new Date(Date.now() + 1000 * 60 * 60 * 24)
-    const validDate = testDate.toISOString().split('T')[0]
-    const validTime = new Intl.DateTimeFormat('en-US', {
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: false,
-      timeZone: 'UTC',
-    }).format(testDate.getTime())
+  it.only('should be able to use the form', () => {
+    cy.intercept('POST', '/api', { fixture: 'eventCreated.json' }).as(
+      'createEventAPI'
+    )
+    const name = 'Test Event'
+    const date = '2022-05-02'
+    const time = '10:00'
+    const description = `${'Testing data'}`
 
-    cy.get('input[name=name]').type('Test Event')
-    cy.get('input[name=date]').type(validDate)
-    cy.get('input[name=time]').type(validTime)
-    cy.get('textarea[name=description]').type(`${'Testing data'}{enter}`)
+    cy.get('input[name=name]').type(name)
+    cy.get('input[name=date]').type(date)
+    cy.get('input[name=time]').type(time)
+    cy.get('textarea[name=description]').type(description)
+
     cy.get('button').click()
 
-    // FIXME: when form is implemented
-    cy.get('@consoleLog').should('be.calledOnce')
+    // cy.get('@consoleLog').should('be.calledOnce')
+    cy.wait('@createEventAPI')
+      .its('request.body')
+      .should('deep.equal', JSON.stringify({ name, date, time, description }))
   })
 
-  it('name should be a required field', () => {
+  it.skip('name should be a required field', () => {
     cy.get('button').click()
 
     // FIXME: when form is implemented
@@ -74,7 +78,7 @@ describe('Add Event Form', () => {
     cy.get('small').should('contain', 'name is a required field')
   })
 
-  it('date should be a required field', () => {
+  it.skip('date should be a required field', () => {
     cy.get('input[name=name]').type('Test Event')
 
     cy.get('button').click()

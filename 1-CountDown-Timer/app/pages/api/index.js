@@ -16,6 +16,8 @@ export default async function handler(req, res) {
 }
 
 async function crear(req, res) {
+  console.log(req.body)
+
   const id = randomUUID()
   let { name, date, time, description } = req.body
 
